@@ -13,21 +13,6 @@ class Posts extends React.Component {
         this.props.fetchPostsByCategory(this.props.category.name);
     }
 
-//     createPosts() {
-//         return this.props.posts.map((post) => {
-//             return (<li key={post.id}>{post.title}</li>);
-//         })
-//     }
-
-//     render() {
-//         console.log("posts", this.props.posts);
-//         return (
-//             <ul>{this.createPosts()}</ul>
-//         );
-//     }
-
-// }
-
     render() {
         console.log("posts", this.props.posts);
         return (
