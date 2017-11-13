@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import PostForm from "./PostForm";
-import CategoryList from "./CategoryList";
 import { Route } from "react-router-dom";
 import "./App.css";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";

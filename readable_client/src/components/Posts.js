@@ -16,18 +16,15 @@ class Posts extends React.Component {
     render() {
         console.log("posts", this.props.posts);
         return (
-            <ol className="posts">
-                {this.props.posts.map((post) => (
-                    <li key={post.id}>
-                        <div>
-                            <p>
-                                rockstar
-                                </p>
-                            <Post/>
-                        </div>
-                    </li>
-                ))}
-            </ol>
+            <ol className="posts-grid">
+            {this.props.posts.map((post) => (
+              <li key={post.id}>
+                <div>
+                  {post.id}
+                </div>
+              </li>
+            ))}
+          </ol>
         );
     }
 
