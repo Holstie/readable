@@ -6,17 +6,17 @@ import PropTypes from 'prop-types'
 
 class Post extends React.Component {
     static propTypes = {
-        post: PropTypes.object.isRequired
+        postName: PropTypes.object.isRequired
     }
 
     render() {
-        console.log(this.props)
+        console.log("Post", this.props)
 
         return (
 
             <p>
-                hej
-                </p>
+                hello
+            </p>
         );
     }
 
