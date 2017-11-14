@@ -1,5 +1,5 @@
 import axios from "axios";
-const ROOT_URL = "http://localhost:5002";
+const ROOT_URL = "http://localhost:3001";
 
 const headers = {
   Accept: "application/json",
