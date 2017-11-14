@@ -1,6 +1,7 @@
 const clone = require('clone')
 
 let db = {}
+
 const defaultData = {
   "8xf0y6ziyjabvozdd253nd": {
     id: '8xf0y6ziyjabvozdd253nd',
@@ -10,7 +11,8 @@ const defaultData = {
     author: 'thingtwo',
     category: 'react',
     voteScore: 6,
-    deleted: false
+    deleted: false,
+    commentCount: 2
   },
   "6ni6ok3ym7mf1p33lnez": {
     id: '6ni6ok3ym7mf1p33lnez',
@@ -20,7 +22,8 @@ const defaultData = {
     author: 'thingone',
     category: 'redux',
     voteScore: -5,
-    deleted: false
+    deleted: false,
+    commentCount: 0
   }
 }
 
@@ -56,7 +59,7 @@ function getAll (token) {
   return new Promise((res) => {
     const posts = getData(token)
     let keys = Object.keys(posts)
-    let filtered_keys = keys.filter(key => !posts.deleted)
+    let filtered_keys = keys.filter(key => !posts[key].deleted)
     res(filtered_keys.map(key => posts[key]))
   })
 }
@@ -73,7 +76,8 @@ function add (token, post) {
       author: post.author,
       category: post.category,
       voteScore: 1,
-      deleted: false
+      deleted: false,
+      commentCount: 0
     }
 
     res(posts[post.id])
@@ -116,6 +120,13 @@ function edit (token, id, post) {
     })
 }
 
+function incrementCommentCounter(token, id, count) {
+  const data = getData(token)
+  if (data[id]) {
+    data[id].commentCount += count
+  }
+}
+
 module.exports = {
   get,
   getAll,
@@ -124,5 +135,6 @@ module.exports = {
   vote,
   disable,
   edit,
-  getAll
+  getAll,
+  incrementCommentCounter
 }
