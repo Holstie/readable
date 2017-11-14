@@ -3,7 +3,8 @@ const ROOT_URL = "http://localhost:3001";
 
 const headers = {
   Accept: "application/json",
-  Authorization: "authorized"
+  Authorization: "authorized",
+  'Content-Type': 'application/json',  
 };
 
 // Categories
@@ -12,8 +13,7 @@ export const fetchCategories = () => {
   return request;
 }
 
-export const fetchCategoryByCategory = (category) => {
-  const request = axios.get(`${ROOT_URL}/${category}/posts`, { headers });
-  return request;
-}
+export const fetchCategoryByCategory = (category) =>
+fetch(`${ROOT_URL}/${category}/posts`, { headers })
+    .then(res => res.json())
   

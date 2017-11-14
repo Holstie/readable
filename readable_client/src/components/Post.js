@@ -1,24 +1,17 @@
 import React from "react";
-import PropTypes from 'prop-types'
-
 
 class Post extends React.Component {
-    static propTypes = {
-        postName: PropTypes.object.isRequired
-    }
 
     render() {
         console.log("Post", this.props)
-
         return (
 
             <p>
-                hello
+                I am a post
             </p>
         );
     }
 
 }
-
 
 export default Post;
