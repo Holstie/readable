@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchCategories } from "../actions";
-import { switchPage } from "../actions";
 import Category from "./Category";
 import {
   BottomNavigation,
@@ -9,7 +8,6 @@ import {
 } from "material-ui/BottomNavigation";
 import Paper from "material-ui/Paper";
 import FontIcon from "material-ui/FontIcon";
-import IconLocationOn from "material-ui/svg-icons/communication/location-on";
 const MainIcon = <FontIcon className="material-icons">Main Page</FontIcon>;
 const ReactIcon = <FontIcon className="material-icons">React</FontIcon>;
 const ReduxIcon = <FontIcon className="material-icons">Redux</FontIcon>;

@@ -1,6 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
-import { fetchPostsByCategory } from "../actions";
 import PropTypes from 'prop-types'
 import Posts from './Posts'
 
