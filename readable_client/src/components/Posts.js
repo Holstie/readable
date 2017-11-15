@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchPostsByCategory } from "../actions";
+import { fetchPostsByCategory, fetchAllPosts } from "../actions";
 import PropTypes from 'prop-types'
 import Post from './Post'
 
@@ -11,18 +11,21 @@ class Posts extends React.Component {
         posts: PropTypes.array
     }
     componentDidMount() {
-        this.props.fetchPostsByCategory(this.props.category.name);
+        //this.props.fetchPostsByCategory(this.props.category.name);
+        this.props.fetchAllPosts();
     }
 
     createPosts = (posts) => (
-      posts.map(post => (
-        <Post post={post}/>
-      ))
+        posts.map(post => (
+            <Post post={post} />
+        ))
     )
+
     render() {
+        console.log(this.props)
         return (
             <ul>
-            dsfsklj
+                <h1>Posts</h1>
                 {this.createPosts(this.props.posts)}
             </ul>
         )
@@ -30,10 +33,10 @@ class Posts extends React.Component {
 
 }
 
-function mapStateToProps({posts}, ownProps) {
+function mapStateToProps({ posts }, ownProps) {
     return {
         posts: Object.keys(posts.items).map(key => posts.items[key])
     };
 }
 
-export default connect(mapStateToProps, { fetchPostsByCategory })(Posts);
+export default connect(mapStateToProps, { fetchPostsByCategory, fetchAllPosts })(Posts);

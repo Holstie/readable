@@ -45,7 +45,7 @@ h1header {
 }
 
 h1 {
-  padding-left: 30px;
+  padding-left: 0px;
   margin-bottom: 0px;
   color: #000274;
 }
@@ -56,7 +56,7 @@ h1-new-post {
 }
 
 h2 {
-  padding-left: 40px;
+  padding-left: 0px;
   margin-bottom: 0px;
   color: #020794;
 }

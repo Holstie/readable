@@ -16,4 +16,8 @@ export const fetchCategories = () => {
 export const fetchCategoryByCategory = (category) =>
 fetch(`${ROOT_URL}/${category}/posts`, { headers })
     .then(res => res.json())
+
+    export const fetchAllPosts = () =>
+    fetch(`${ROOT_URL}/posts`, { headers })
+        .then(res => res.json())
   

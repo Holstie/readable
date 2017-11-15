@@ -1,11 +1,13 @@
 import React, { Component } from "react";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import "./App.css";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import Header from "./Header";
 import { connect } from "react-redux";
 import Categories from "./Categories";
 import { fetchCategories } from "../actions";
+import Category from "./Category"
+import Navigation from "./Navigation"
 
 // This project will be using material components in order
 // to create little prettier design
@@ -20,7 +22,10 @@ class App extends Component {
       <MuiThemeProvider>
         <div className="App">
           <Header />
+          <Navigation/>
           <Route exact path="/" component={Categories} />
+          <Route exact="/:category" component={Category} />
+
           {/* <Route exact path="/:category" component={CategoryList} />
           <Route exact path="/:category/:post" component={CategoryList} />
           <Route
