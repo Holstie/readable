@@ -27,7 +27,6 @@ class Categories extends React.Component {
   select = (index) => this.setState({ selectedIndex: index });
 
   render() {
-    console.log(this.props.categories)
     return (
       <div className="bottomNavigation">
         <Paper zDepth={1}>

@@ -1,14 +1,15 @@
 import React from "react";
 
 class Post extends React.Component {
-
     render() {
-        console.log("Post", this.props)
+      const {body, title} = this.props.post
         return (
-
+          <div>
+            <h3>{title}</h3>
             <p>
-                I am a post
+                {body}
             </p>
+          </div>
         );
     }
 
