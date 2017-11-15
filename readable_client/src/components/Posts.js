@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchPostsByCategory, fetchAllPosts } from "../actions";
+import { fetchPostsByCategory, fetchAllPosts} from "../actions";
 import PropTypes from 'prop-types'
 import Post from './Post'
 
@@ -8,11 +8,15 @@ import Post from './Post'
 class Posts extends React.Component {
     static propTypes = {
         category: PropTypes.object.isRequired,
-        posts: PropTypes.array
+        posts: PropTypes.array,
     }
     componentDidMount() {
+        
+            //console.log("route", s);
+            this.props.fetchAllPosts();
+            
         //this.props.fetchPostsByCategory(this.props.category.name);
-        this.props.fetchAllPosts();
+
     }
 
     createPosts = (posts) => (

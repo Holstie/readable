@@ -42,7 +42,7 @@ class App extends Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    categories: state.categories
+    categories: state.categories,
   };
 }
 
