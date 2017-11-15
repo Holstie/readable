@@ -8,39 +8,31 @@ import Post from './Post'
 class Posts extends React.Component {
     static propTypes = {
         category: PropTypes.object.isRequired,
-        posts: PropTypes.object
+        posts: PropTypes.array
     }
     componentDidMount() {
         this.props.fetchPostsByCategory(this.props.category.name);
     }
 
-    createPosts(posts) {
-        if (posts) {
-            console.log("createPosts", "we have posts")
-            Object.entries(posts).forEach(post => {
-                return (
-                   <Post/>
-                )
-            });
-        } else {
-            console.log("createPosts", "we do not have posts")
-            return (<div>damn</div>)
-        }
-    }
-
+    createPosts = (posts) => (
+      posts.map(post => (
+        <Post post={post}/>
+      ))
+    )
     render() {
         return (
             <ul>
-                {this.createPosts(this.props.posts.items)}
+            dsfsklj
+                {this.createPosts(this.props.posts)}
             </ul>
         )
     }
 
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps({posts}, ownProps) {
     return {
-        posts: state.posts
+        posts: Object.keys(posts.items).map(key => posts.items[key])
     };
 }
 

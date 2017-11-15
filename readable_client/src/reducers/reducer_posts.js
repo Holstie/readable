@@ -1,6 +1,10 @@
 import * as Actions from '../constants/Types';
 
-export default function (state = {}, action) {
+const initialPostState = {
+  items: {}
+}
+
+export default function (state = initialPostState, action) {
   switch (action.type) {
     case Actions.FETCH_POSTS_FOR_CATEGORY_FULFILLED:
     return {
