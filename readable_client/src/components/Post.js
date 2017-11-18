@@ -27,7 +27,10 @@ class Post extends React.Component {
                 <b>Post timestamp:</b> {<Time value={timestamp} format="YYYY/MM/DD" />}
               </p>
               <p>
-                <b>Category body:</b> {body}
+                <b>Body:</b> {body}
+              </p>
+              <p>
+                <b>Category:</b> {category}
               </p>
               <p>
                 <b>Vote Score:</b> {voteScore}

@@ -2,11 +2,13 @@ import React from "react";
 import { connect } from "react-redux";
 import { fetchCategories } from "../actions";
 import Category from "./Category";
+import { changeRoute } from "../actions";
 
 
 class Categories extends React.Component {
   componentDidMount() {
     this.props.fetchCategories();
+    this.props.changeRoute("");    
   }
 
   state = {
@@ -30,4 +32,4 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-export default connect(mapStateToProps, { fetchCategories })(Categories);
+export default connect(mapStateToProps, { fetchCategories, changeRoute })(Categories);

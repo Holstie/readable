@@ -17,9 +17,6 @@ const NewPostIcon = <FontIcon className="material-icons">New Post</FontIcon>;
 
 
 class Navigation extends React.Component {
-  componentDidMount() {
-    this.props.changeRoute("react")
-  }
 
   state = {
     selectedIndex: 0,
@@ -27,32 +24,45 @@ class Navigation extends React.Component {
 
   select = (index) => this.setState({ selectedIndex: index });
 
+  changeRouteTo = (route) => (
+    this.props.changeRoute(route)
+  )
+
 
   render() {
+    const react = "react";
+    const redux = "redux";
+    const udacity = "udacity";
+    const newpost = "newpost";
     return (
       <div className="bottomNavigation">
         <Paper zDepth={1}>
           <BottomNavigation selectedIndex={this.state.selectedIndex}>
             <BottomNavigationItem
               icon={MainIcon}
+              onClick={() => {this.changeRouteTo(""), this.select(0)}}
               containerElement={<Link to="/"></Link>}
-              />
+            />
             <BottomNavigationItem
-              containerElement={<Link to="/react"></Link>}
+              onClick={() => {this.changeRouteTo(react), this.select(1)}}
+              containerElement={<Link to={"/" + react}></Link>}
               icon={ReactIcon}
             />
             <BottomNavigationItem
               icon={ReduxIcon}
-              containerElement={<Link to="/redux"></Link>}
-              />
+              onClick={() => {this.changeRouteTo(redux), this.select(2)}}
+              containerElement={<Link to={"/" + redux}></Link>}
+            />
             <BottomNavigationItem
               icon={UdacityIcon}
-              containerElement={<Link to="/udacity"></Link>}
-              />
+              onClick={() => {this.changeRouteTo(udacity), this.select(3)}}
+              containerElement={<Link to={"/" + udacity}></Link>}
+            />
             <BottomNavigationItem
               icon={NewPostIcon}
-              containerElement={<Link to="/newpost"></Link>}
-              />
+              onClick={() => {this.changeRouteTo(newpost), this.select(4)}}
+              containerElement={<Link to={"/" + newpost}></Link>}
+            />
           </BottomNavigation>
         </Paper>
       </div>
@@ -62,8 +72,7 @@ class Navigation extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    route: ""
   };
 }
 
-export default connect(mapStateToProps, {changeRoute})(Navigation);
+export default connect(mapStateToProps, { changeRoute })(Navigation);

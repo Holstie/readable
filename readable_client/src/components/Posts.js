@@ -1,22 +1,19 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchPostsByCategory, fetchAllPosts} from "../actions";
+import { fetchAllPosts } from "../actions";
 import PropTypes from 'prop-types'
 import Post from './Post'
+import { withRouter } from 'react-router-dom';
+
 
 
 class Posts extends React.Component {
     static propTypes = {
-        category: PropTypes.object.isRequired,
         posts: PropTypes.array,
+        route: PropTypes.string,
     }
     componentDidMount() {
-        
-            //console.log("route", s);
-            this.props.fetchAllPosts();
-            
-        //this.props.fetchPostsByCategory(this.props.category.name);
-
+        this.props.fetchAllPosts();
     }
 
     createPosts = (posts) => (
@@ -25,22 +22,35 @@ class Posts extends React.Component {
         ))
     )
 
+
     render() {
-        console.log(this.props)
+        let filtered
+        console.log("route", this.props.route)
+        if (this.props.route === "") {
+            filtered = this.props.posts
+        } else {
+            console.log("shit");
+            filtered = this.props.posts.filter(
+                (post) => {
+                    return post.category === this.props.route;
+                }
+            )
+        }
+        console.log("filtered", filtered);
         return (
             <ul>
-                <h1>Posts</h1>
-                {this.createPosts(this.props.posts)}
+                {this.createPosts(filtered)}
             </ul>
         )
     }
 
 }
 
-function mapStateToProps({ posts }, ownProps) {
+function mapStateToProps(state) {
     return {
-        posts: Object.keys(posts.items).map(key => posts.items[key])
+        posts: Object.keys(state.posts.items).map(key => state.posts.items[key]),
+        route: state.router.route
     };
 }
 
-export default connect(mapStateToProps, { fetchPostsByCategory, fetchAllPosts })(Posts);
+export default connect(mapStateToProps, { fetchAllPosts })(Posts);
