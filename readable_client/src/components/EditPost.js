@@ -1,73 +1,145 @@
 import React from "react";
-import PropTypes from "prop-types";
 import TextField from "material-ui/TextField";
-import SelectField from "material-ui/SelectField";
-import MenuItem from "material-ui/MenuItem";
 import FloatingActionButton from "material-ui/FloatingActionButton";
 import ActionDone from "material-ui/svg-icons/action/done";
-import { changeRoute } from "../actions";
+import { changeRoute, editPost } from "../actions";
 import { connect } from "react-redux";
 
 class EditPost extends React.Component {
+  state = {
+    id: "",
+    title: "",
+    author: "",
+    body: "",
+    category: ""
+  };
+
   componentDidMount() {
     this.props.changeRoute("editPost");
   }
 
+  handleInputChange = event => {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    switch (name) {
+      case "author":
+        this.setState({ author: value });
+        break;
+      case "category":
+        this.setState({ category: value });
+        break;
+      case "body":
+        this.setState({ body: value });
+        break;
+      case "title":
+        this.setState({ title: value });
+        break;
+    }
+  };
+  editPost = post => this.props.editPost(post);
+
+  onEditClick = () => {
+    const id = this.state.id;
+    const { title, category, body, author } = this.state;
+
+    this.editPost({
+      id,
+      title,
+      body,
+      author,
+      category
+    });
+  };
+
   render() {
-    const styles = {
-      customWidth: {
-        width: 150
-      }
-    };
     const actionDoneStyle = {
       marginRight: 20
     };
+
+    var post = this.props.post[0];
+
+    if (post == null) {
+      post = {
+        id: "",
+        title: "",
+        body: "",
+        author: "",
+        category: "none"
+      };
+    }
+
+    this.state.id = post.id;
+    this.state.title = post.title;
+    this.state.body = post.body;
+    this.state.author = post.author;
+    this.state.category = post.category;
+
     return (
-      <div className="new-post">
+      <div className="edit-post">
         <div>
-          <h2>New Post</h2>
-          <TextField name="id" floatingLabelText="Give an id" ref="id" />
-          <br />
+          <h2>Edit Post</h2>
         </div>
+        <div />
         <div>
           <TextField
-            name="timestamp"
-            floatingLabelText="Timestamp"
-            ref="timestamp"
+            name="title"
+            defaultValue={post.title}
+            floatingLabelText="Title"
+            onChange={this.handleInputChange}
           />
           <br />
         </div>
         <div>
-          <TextField name="title" floatingLabelText="Title" ref="title" />
+          <TextField
+            name="body"
+            defaultValue={post.body}
+            floatingLabelText="Body"
+            onChange={this.handleInputChange}
+          />
           <br />
         </div>
         <div>
-          <TextField name="body" floatingLabelText="Body" ref="body" />
-          <br />
-        </div>
-        <div>
-          <TextField name="author" floatingLabelText="Author" ref="author" />
+          <TextField
+            name="author"
+            defaultValue={post.author}
+            floatingLabelText="Author"
+            onChange={this.handleInputChange}
+          />
           <br />
         </div>
 
         <div>
-          <select name="category" ref="category">
+          <select
+            name="category"
+            defaultValue={post.category}
+            onChange={this.handleInputChange}
+          >
             <option value="none">None</option>
             <option value="react">React</option>
             <option value="redux">Redux</option>
             <option value="udacity">Udacity</option>
           </select>
         </div>
-        <FloatingActionButton style={actionDoneStyle}>
-          <ActionDone />
-        </FloatingActionButton>
+        <div className="EditPost-Button">
+          <input
+            className="Post-Button"
+            type="button"
+            onClick={this.onEditClick}
+            value="Done"
+          />
+        </div>
       </div>
     );
   }
 }
-
 function mapStateToProps(state, ownProps) {
-  return {};
+  return {
+    post: Object.keys(state.posts.items)
+      .map(key => state.posts.items[key])
+      .filter(post => post.id === state.posts.currentPost)
+  };
 }
 
-export default connect(mapStateToProps, { changeRoute })(EditPost);
+export default connect(mapStateToProps, { changeRoute, editPost })(EditPost);

@@ -4,20 +4,52 @@ const ROOT_URL = "http://localhost:3001";
 const headers = {
   Accept: "application/json",
   Authorization: "authorized",
-  'Content-Type': 'application/json',
+  "Content-Type": "application/json"
 };
+
+const postMethod = { method: "POST" };
+const putMethod = { method: "PUT" };
+const getMethod = { method: "GET" };
 
 // Categories
 export const fetchCategories = () => {
   const request = axios.get(`${ROOT_URL}/categories`, { headers });
   return request;
-}
+};
 
-export const fetchPostsByCategory = (category) =>
-  fetch(`${ROOT_URL}/${category}/posts`, { headers })
-    .then(res => res.json())
+export const fetchPostsByCategory = category =>
+  fetch(`${ROOT_URL}/${category}/posts`, { headers }).then(res => res.json());
 
 export const fetchAllPosts = () =>
-  fetch(`${ROOT_URL}/posts`, { headers })
-    .then(res => res.json())
+  fetch(`${ROOT_URL}/posts`, { headers }, { getMethod }).then(res =>
+    res.json()
+  );
 
+export const fetchPostById = id =>
+  fetch(`${ROOT_URL}/posts/${id}`, { headers }).then(res => res.json());
+
+export const createPost = post =>
+  fetch(
+    `${ROOT_URL}/posts/`,
+    { headers },
+    { postMethod },
+    {
+      body: JSON.stringify(post)
+    }
+  )
+    .then(console.log(JSON.stringify))
+    .then(results => results.json())
+    .then(data => data);
+
+export const editPost = post =>
+  fetch(
+    `${ROOT_URL}/posts/${post.id}`,
+    { headers },
+    { putMethod },
+    {
+      body: JSON.stringify(post)
+    }
+  )
+    .then(console.log(JSON.stringify))
+    .then(results => results.json())
+    .then(data => data);

@@ -3,11 +3,26 @@ import Time from "react-time";
 import { addCategory } from "../actions";
 import { Card, CardActions, CardHeader, CardText } from "material-ui/Card";
 import FlatButton from "material-ui/FlatButton";
-import { lightBlue900 } from 'material-ui/styles/colors'
+import { lightBlue900 } from "material-ui/styles/colors";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { setCurrentPost } from "../actions";
 
 class Post extends React.Component {
+  setCurrentPost = id => this.props.setCurrentPost(id);
   render() {
-    const { body, title, author, category, deleted, commentCount, timestamp, id, voteScore } = this.props.post
+    const {
+      body,
+      title,
+      author,
+      category,
+      deleted,
+      commentCount,
+      timestamp,
+      id,
+      voteScore
+    } = this.props.post;
+
     return (
       <div>
         <Card>
@@ -20,12 +35,6 @@ class Post extends React.Component {
           />
           <CardText expandable={false}>
             <div className="postList">
-              <p>
-                <b>Post id:</b> {id}
-              </p>
-              <p>
-                <b>Post timestamp:</b> {<Time value={timestamp} format="YYYY/MM/DD" />}
-              </p>
               <p>
                 <b>Body:</b> {body}
               </p>
@@ -40,33 +49,25 @@ class Post extends React.Component {
           <CardActions>
             <FlatButton
               label="Edit Post"
-              onClick={() => this.onEdit()}
+              onClick={() => {
+                this.setCurrentPost(id);
+                this.props.history.push("/editpost/" + id);
+              }}
             />
-            <FlatButton
-              label="Upvote"
-              onClick={() =>
-                this.onUpVote(id)}
-            />
-            <FlatButton
-              label="Downvote"
-              onClick={() =>
-                this.onDownVote(id)}
-            />
-            <FlatButton
-              onClick={() => this.changeMode()}
-              label="Details"
-            />
-            <FlatButton
-              onClick={() => this.delete()}
-              label="Delete"
-            />
+            <FlatButton label="Upvote" onClick={() => this.onUpVote(id)} />
+            <FlatButton label="Downvote" onClick={() => this.onDownVote(id)} />
+            <FlatButton onClick={() => this.changeMode()} label="Details" />
+            <FlatButton onClick={() => this.delete()} label="Delete" />
           </CardActions>
         </Card>
       </div>
-
     );
   }
-
+}
+function mapStateToProps(state, ownProps) {
+  return {
+    item: {}
+  };
 }
 
-export default Post;
+export default connect(mapStateToProps, { setCurrentPost })(Post);
