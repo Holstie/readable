@@ -6,10 +6,16 @@ import FlatButton from "material-ui/FlatButton";
 import { lightBlue900 } from "material-ui/styles/colors";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { setCurrentPost } from "../actions";
+import { setCurrentPost, votePost} from "../actions";
 
 class Post extends React.Component {
   setCurrentPost = id => this.props.setCurrentPost(id);
+
+
+  onUpVote = (id) => votePost(id, "upVote");
+  onDownVote = (id) => votePost(id, "downVote")
+
+
   render() {
     const {
       body,
@@ -70,4 +76,4 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-export default connect(mapStateToProps, { setCurrentPost })(Post);
+export default connect(mapStateToProps, { setCurrentPost, votePost })(Post);

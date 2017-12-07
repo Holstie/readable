@@ -45,3 +45,5 @@ export const CREATE_POST_FULFILLED = "CREATE_POST_FULFILLED"
 
 export const CHANGE_ROUTE = "CHANGE_ROUTE";
 export const GET_ROUTE = "GET_ROUTE";
+
+export const VOTE_POST ="VOTE_POST";

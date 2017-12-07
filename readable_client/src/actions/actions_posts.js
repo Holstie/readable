@@ -30,7 +30,7 @@ export function editPost(post) {
 }
 
 export function createPost(post) {
-  console.log("newpost", post);
+  console.log("newpost", JSON.stringify(post));
   return {
     tyoe: Action.CREATE_POST,
     payload: api.createPost(post)
@@ -42,4 +42,12 @@ export function setCurrentPost(id) {
     type: Action.SET_CURRENT_POST,
     payload: id
   };
+}
+
+
+export function votePost(id, vote) {
+  return {
+    type: Action.VOTE_POST,
+    payload: api.votePost(id, vote)
+  }
 }

@@ -7,3 +7,4 @@ export { fetchPost } from "./actions_posts";
 export { setCurrentPost } from "./actions_posts";
 export { editPost } from "./actions_posts";
 export { createPost } from "./actions_posts";
+export { votePost } from "./actions_posts";
