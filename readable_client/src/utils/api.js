@@ -67,10 +67,7 @@ export const votePost = function (id, vote) {
   console.log("vote", vote)
   fetch("http://localhost:3001/posts/" + id, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": "c"
-    },
+    headers,
     body: JSON.stringify({ option: vote })
   })
   .then(function (){
