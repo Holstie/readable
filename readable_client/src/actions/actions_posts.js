@@ -8,6 +8,20 @@ export function fetchPostsByCategory(category) {
   };
 }
 
+export function fetchAllCommentsForPost(id){
+  return {
+    type: Action.FETCH_ALL_COMMENTS,
+    payload: api.fetchAllCommentsForPost(id)
+  }
+}
+
+export function changeSort(sort){
+  return {
+    type: Action.CHANGE_SORT,
+    payload: sort
+  }
+}
+
 export function fetchAllPosts() {
   return {
     type: Action.FETCH_ALL_POSTS,
@@ -30,7 +44,6 @@ export function editPost(post) {
 }
 
 export function createPost(post) {
-  console.log("newpost", JSON.stringify(post));
   return {
     tyoe: Action.CREATE_POST,
     payload: api.createPost(post)
@@ -43,7 +56,6 @@ export function setCurrentPost(id) {
     payload: id
   };
 }
-
 
 export function votePost(id, vote) {
   return {

@@ -6,15 +6,15 @@ import FlatButton from "material-ui/FlatButton";
 import { lightBlue900 } from "material-ui/styles/colors";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { setCurrentPost, votePost} from "../actions";
+import { setCurrentPost, votePost } from "../actions";
 
 class Post extends React.Component {
   setCurrentPost = id => this.props.setCurrentPost(id);
 
+  onUpVote = id => this.props.votePost(id, "upVote");
+  onDownVote = id => this.props.votePost(id, "downVote");
 
-  onUpVote = (id) => votePost(id, "upVote");
-  onDownVote = (id) => votePost(id, "downVote")
-
+  //this.props.history.push("/" + category + "/" + id);
 
   render() {
     const {
@@ -50,6 +50,9 @@ class Post extends React.Component {
               <p>
                 <b>Vote Score:</b> {voteScore}
               </p>
+              <p>
+                <b>Comments:</b> {commentCount}
+              </p>
             </div>
           </CardText>
           <CardActions>
@@ -57,13 +60,20 @@ class Post extends React.Component {
               label="Edit Post"
               onClick={() => {
                 this.setCurrentPost(id);
-                this.props.history.push("/editpost/" + id);
+                //this.props.history.push("/editpost/" + id);
               }}
+              containerElement={<Link to={"/editpost/" + id} />}
             />
             <FlatButton label="Upvote" onClick={() => this.onUpVote(id)} />
             <FlatButton label="Downvote" onClick={() => this.onDownVote(id)} />
-            <FlatButton onClick={() => this.changeMode()} label="Details" />
-            <FlatButton onClick={() => this.delete()} label="Delete" />
+            <FlatButton
+              label="Details"
+              onClick={() => {
+                this.setCurrentPost(id);
+              }}
+              containerElement={<Link to={"/" + category + "/" + id} />}
+            />
+            <FlatButton label="Delete" onClick={() => this.delete()} />
           </CardActions>
         </Card>
       </div>

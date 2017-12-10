@@ -25,16 +25,16 @@ class EditPost extends React.Component {
 
     switch (name) {
       case "author":
-        this.setState({ author: value });
+        this.state.author = value;
         break;
       case "category":
-        this.setState({ category: value });
+        this.state.category = value;
         break;
       case "body":
-        this.setState({ body: value });
+        this.state.body = value;
         break;
       case "title":
-        this.setState({ title: value });
+        this.state.title = value;
         break;
     }
   };

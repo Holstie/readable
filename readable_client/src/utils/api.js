@@ -3,12 +3,10 @@ const ROOT_URL = "http://localhost:3001";
 
 const headers = {
   Accept: "application/json",
-  Authorization: "c",
+  Authorization: "cd",
   "Content-Type": "application/json"
 };
 
-const postMethod = { method: "POST" };
-const putMethod = { method: "PUT" };
 const getMethod = { method: "GET" };
 
 // Categories
@@ -25,54 +23,35 @@ export const fetchAllPosts = () =>
     res.json()
   );
 
+
+export const fetchAllCommentsForPost = id =>
+fetch(`${ROOT_URL}/comments/${id}`, { headers }, { getMethod }).then(res =>
+  res.json()
+);
+
 export const fetchPostById = id =>
   fetch(`${ROOT_URL}/posts/${id}`, { headers }).then(res => res.json());
 
 export const createPost = post =>
   fetch("http://localhost:3001/posts", {
     method: "POST",
-    headers: {
-      Accept: "application/json",
-      Authorization: "c"
-    },
+    headers,
     body: JSON.stringify(post)
   })
     .then(res => res.json)
-    .then(data => console.log(data));
-
-// export const createPost = post =>
-//   fetch(
-//     `${ROOT_URL}/posts/`,
-//     { headers },
-//     { postMethod },
-//     {
-//       body: JSON.stringify(post)
-//     }
-//   ).then(results => results.json());
 
 export const editPost = post =>
-  fetch(
-    `${ROOT_URL}/posts/${post.id}`,
-    { headers },
-    { putMethod },
-    {
-      body: JSON.stringify(post)
-    }
-  )
-    .then(console.log(JSON.stringify))
-    .then(results => results.json())
-    .then(data => data);
+  fetch(`${ROOT_URL}/posts/${post.id}`, {
+    method: "PUT",
+    headers,
 
-export const votePost = function (id, vote) {
-  console.log("vote", vote)
-  fetch("http://localhost:3001/posts/" + id, {
+    body: JSON.stringify(post)
+  })
+    .then(res => res.json())
+
+export const votePost = (id, vote) =>
+  fetch(`${ROOT_URL}/posts/${id}`, {
     method: "POST",
     headers,
     body: JSON.stringify({ option: vote })
-  })
-  .then(function (){
-
-  })
-  //.then(console.log(JSON.stringify))
-  //.then(results => results.json());
-}
+  }).then(res => res.json());

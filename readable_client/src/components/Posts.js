@@ -4,6 +4,8 @@ import { fetchAllPosts } from "../actions";
 import PropTypes from "prop-types";
 import Post from "./Post";
 import { withRouter } from "react-router-dom";
+import FlatButton from "material-ui/FlatButton";
+import { changeSort } from "../actions";
 
 class Posts extends React.Component {
   static propTypes = {
@@ -14,7 +16,11 @@ class Posts extends React.Component {
     this.props.fetchAllPosts();
   }
 
-  createPosts = posts => posts.map(post => <Post {...this.props} post={post} />);
+  changeSort = sort => this.props.changeSort(sort);
+  
+
+  createPosts = posts =>
+    posts.map(post => <Post {...this.props} post={post} />);
 
   render() {
     let filtered;
@@ -25,15 +31,24 @@ class Posts extends React.Component {
         return post.category === this.props.route;
       });
     }
-    return <ul>{this.createPosts(filtered)}</ul>;
+    return (
+      <div>
+        <div>
+          <FlatButton label="Sort by time" onClick={() => this.changeSort("time")} />
+          <FlatButton label="Sort by score" onClick={() => this.changeSort("score")} />
+        </div>
+        <ul>{this.createPosts(filtered)}</ul>
+      </div>
+    );
   }
 }
 
 function mapStateToProps(state) {
   return {
     posts: Object.keys(state.posts.items).map(key => state.posts.items[key]),
-    route: state.router.route
+    route: state.router.route,
+    sort: state.sort
   };
 }
 
-export default connect(mapStateToProps, { fetchAllPosts })(Posts);
+export default connect(mapStateToProps, { fetchAllPosts, changeSort })(Posts);

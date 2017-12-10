@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import Navigation from "./Navigation";
 import PostForm from "./PostForm";
 import EditPost from "./EditPost";
+import PostDetails from "./PostDetails";
 import Posts from "./Posts";
 import { withRouter } from "react-router";
 
@@ -30,6 +31,7 @@ class App extends Component {
           />
           <Route exact path="/newpost" component={PostForm} />
           <Route exact path="/editpost/:post" component={EditPost} />
+          <Route exact path="/:category/:id" render={props => <PostDetails {...props} />}/>
           {/* <Route exact path="/:category" component={CategoryList} />
           <Route exact path="/:category/:post" component={CategoryList} />
           <Route

@@ -19,11 +19,12 @@ export default function(state = initialPostState, action) {
         { ...state.items }
       )
     };
-    case Actions.VOTE_POST:
+    case Actions.VOTE_POST_FULFILLED:
     return {
       ...state,
-      [action.payload.id]: action.payload
+      items: { ...state.items, [action.payload.id]: action.payload }
     };
+
     case Actions.FETCH_POSTS_FOR_CATEGORY_FULFILLED:
     return {
       ...state,
