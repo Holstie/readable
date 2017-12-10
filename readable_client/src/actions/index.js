@@ -10,4 +10,5 @@ export { editPost } from "./actions_posts";
 export { createPost } from "./actions_posts";
 export { votePost } from "./actions_posts";
 export { changeSort } from "./actions_posts";
-
+export { voteComment } from "./actions_posts";
+export { deletePost } from "./actions_posts";

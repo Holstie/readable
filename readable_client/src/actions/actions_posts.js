@@ -8,18 +8,18 @@ export function fetchPostsByCategory(category) {
   };
 }
 
-export function fetchAllCommentsForPost(id){
+export function fetchAllCommentsForPost(id) {
   return {
     type: Action.FETCH_ALL_COMMENTS,
     payload: api.fetchAllCommentsForPost(id)
-  }
+  };
 }
 
-export function changeSort(sort){
+export function changeSort(sort) {
   return {
     type: Action.CHANGE_SORT,
     payload: sort
-  }
+  };
 }
 
 export function fetchAllPosts() {
@@ -61,5 +61,19 @@ export function votePost(id, vote) {
   return {
     type: Action.VOTE_POST,
     payload: api.votePost(id, vote)
-  }
+  };
+}
+
+export function voteComment(id, vote) {
+  return {
+    type: Action.VOTE_COMMENT,
+    payload: api.voteComment(id, vote)
+  };
+}
+
+export function deletePost(id) {
+  return {
+    type: Action.DELETE_POST,
+    payload: api.deletePost(id)
+  };
 }

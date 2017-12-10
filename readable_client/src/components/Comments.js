@@ -2,35 +2,37 @@ import React from "react";
 import { connect } from "react-redux";
 import { fetchAllCommentsForPost } from "../actions";
 import PropTypes from "prop-types";
+import Comment from "./Comment"
 
 class Comments extends React.Component {
   static propTypes = {
-    currentPost: PropTypes.string
+    currentPost: PropTypes.string,
+    comments: PropTypes.array
   };
 
   componentDidMount() {
-    this.props.fetchAllCommentsForPost();
+    this.props.fetchAllCommentsForPost(this.props.currentPost);
   }
 
-  createPosts = posts =>
-    posts.map(post => <Post {...this.props} post={post} />);
+  createComments = comments =>
+  comments.map(comment => <Comment key={comment.id} {...this.props} comment={comment} />);
+
 
   render() {
-    let filtered = this.props.posts.filter(post => {
-      return post.id === this.props.currentPost;
-    });
-
     return (
       <div>
-        <ul>{this.createPosts(filtered)}</ul>
+        <ul>{this.createComments(this.props.comments)}</ul>
       </div>
     );
   }
 }
 function mapStateToProps(state) {
   return {
+    comments: Object.keys(state.posts.comments).map(
+      key => state.posts.comments[key]
+    ),
     currentPost: state.posts.currentPost
   };
 }
 
-export default connect(mapStateToProps, { fetchAllComments })(Comments);
+export default connect(mapStateToProps, { fetchAllCommentsForPost })(Comments);

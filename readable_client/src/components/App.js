@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import "./App.css";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import Header from "./Header";
@@ -23,15 +23,19 @@ class App extends Component {
         <div className="App">
           <Header />
           <Navigation />
-          <Route exact path="/" render={props => <Posts {...props} />} />
+          <Switch>
+
+          <Route exact path="/editpost/:post" component={EditPost} />
+          <Route exact path="/newpost" component={PostForm} />
+          <Route exact path="/:category/:id" render={props => <PostDetails {...props} />}/>
           <Route
             exact
             path="/:category"
             render={props => <Posts {...props} />}
           />
-          <Route exact path="/newpost" component={PostForm} />
-          <Route exact path="/editpost/:post" component={EditPost} />
-          <Route exact path="/:category/:id" render={props => <PostDetails {...props} />}/>
+          <Route exact path="/" render={props => <Posts {...props} />} />
+          </Switch>
+
           {/* <Route exact path="/:category" component={CategoryList} />
           <Route exact path="/:category/:post" component={CategoryList} />
           <Route
