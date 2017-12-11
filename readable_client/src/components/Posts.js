@@ -33,7 +33,7 @@ class Posts extends React.Component {
     }
     if (this.props.sorting === "time") {
       filtered.sort(function(a, b) {
-        return a.timestamp > b.timestamp;
+        return a.timestamp < b.timestamp;
       });
     } else {
       filtered.sort(function(a, b) {

@@ -6,13 +6,14 @@ import FlatButton from "material-ui/FlatButton";
 import { lightBlue900 } from "material-ui/styles/colors";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { setCurrentPost, voteComment } from "../actions";
+import { setCurrentComment, voteComment, deleteComment } from "../actions";
 
 class Comment extends React.Component {
-  setCurrentPost = id => this.props.setCurrentPost(id);
+  setCurrentComment = id => this.props.setCurrentComment(id);
 
   onUpVote = id => this.props.voteComment(id, "upVote");
   onDownVote = id => this.props.voteComment(id, "downVote");
+  deleteComment = id => this.props.deleteComment(id);
 
   render() {
     const {
@@ -48,13 +49,12 @@ class Comment extends React.Component {
           <CardActions>
             <FlatButton
               label="Edit comment"
-              onClick={() => {
-              }}
-              containerElement={<Link to={"/editpost/" + id} />}
+              onClick={() => this.setCurrentComment(id)}
+              containerElement={<Link to={"/editComment/" + id} />}
             />
             <FlatButton label="Upvote" onClick={() => this.onUpVote(id)} />
             <FlatButton label="Downvote" onClick={() => this.onDownVote(id)} />
-            <FlatButton label="Delete" onClick={() => this.delete()} />
+            <FlatButton label="Delete" onClick={() => this.deleteComment(id)} />
           </CardActions>
         </Card>
       </div>
@@ -67,4 +67,6 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-export default connect(mapStateToProps, { setCurrentPost, voteComment })(Comment);
+export default connect(mapStateToProps, { setCurrentComment, voteComment, deleteComment })(
+  Comment
+);

@@ -29,7 +29,7 @@ class Post extends React.Component {
     } = this.props.post;
 
     return (
-      <div>
+      <div class="card">
         <Card>
           <CardHeader
             title={title}

@@ -12,3 +12,6 @@ export { votePost } from "./actions_posts";
 export { changeSort } from "./actions_posts";
 export { voteComment } from "./actions_posts";
 export { deletePost } from "./actions_posts";
+export { deleteComment } from "./actions_posts";
+export { setCurrentComment } from "./actions_posts";
+export { editComment } from "./actions_posts";

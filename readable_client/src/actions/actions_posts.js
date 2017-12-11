@@ -43,6 +43,14 @@ export function editPost(post) {
   };
 }
 
+export function editComment(comment) {
+  return {
+    type: Action.EDIT_COMMENT,
+    payload: api.editComment(comment)
+  };
+}
+
+
 export function createPost(post) {
   return {
     tyoe: Action.CREATE_POST,
@@ -53,6 +61,13 @@ export function createPost(post) {
 export function setCurrentPost(id) {
   return {
     type: Action.SET_CURRENT_POST,
+    payload: id
+  };
+}
+
+export function setCurrentComment(id) {
+  return {
+    type: Action.SET_CURRENT_COMMENT,
     payload: id
   };
 }
@@ -75,5 +90,12 @@ export function deletePost(id) {
   return {
     type: Action.DELETE_POST,
     payload: api.deletePost(id)
+  };
+}
+
+export function deleteComment(id) {
+  return {
+    type: Action.DELETE_COMMENT,
+    payload: api.deleteComment(id)
   };
 }

@@ -42,8 +42,14 @@ export const editPost = post =>
   fetch(`${ROOT_URL}/posts/${post.id}`, {
     method: "PUT",
     headers,
-
     body: JSON.stringify(post)
+  }).then(res => res.json());
+
+export const editComment = comment =>
+  fetch(`${ROOT_URL}/comments/${comment.id}`, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify(comment)
   }).then(res => res.json());
 
 export const votePost = (id, vote) =>
@@ -62,6 +68,12 @@ export const voteComment = (id, vote) =>
 
 export const deletePost = id =>
   fetch(`${ROOT_URL}/posts/${id}`, {
+    method: "DELETE",
+    headers
+  }).then(res => res.json());
+
+export const deleteComment = id =>
+  fetch(`${ROOT_URL}/comments/${id}`, {
     method: "DELETE",
     headers
   }).then(res => res.json());

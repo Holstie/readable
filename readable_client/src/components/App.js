@@ -9,6 +9,7 @@ import PostForm from "./PostForm";
 import EditPost from "./EditPost";
 import PostDetails from "./PostDetails";
 import Posts from "./Posts";
+import EditComment from "./EditComment";
 import { withRouter } from "react-router";
 
 // This project will be using material components in order
@@ -24,16 +25,20 @@ class App extends Component {
           <Header />
           <Navigation />
           <Switch>
-
-          <Route exact path="/editpost/:post" component={EditPost} />
-          <Route exact path="/newpost" component={PostForm} />
-          <Route exact path="/:category/:id" render={props => <PostDetails {...props} />}/>
-          <Route
-            exact
-            path="/:category"
-            render={props => <Posts {...props} />}
-          />
-          <Route exact path="/" render={props => <Posts {...props} />} />
+            <Route exact path="/editpost/:post" component={EditPost} />
+            <Route exact path="/editComment/:comment" component={EditComment} />
+            <Route exact path="/newpost" component={PostForm} />
+            <Route
+              exact
+              path="/:category/:id"
+              render={props => <PostDetails {...props} />}
+            />
+            <Route
+              exact
+              path="/:category"
+              render={props => <Posts {...props} />}
+            />
+            <Route exact path="/" render={props => <Posts {...props} />} />
           </Switch>
 
           {/* <Route exact path="/:category" component={CategoryList} />
