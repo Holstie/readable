@@ -8,6 +8,13 @@ export function fetchPostsByCategory(category) {
   };
 }
 
+export function setAddCommentMode(enabled) {
+  return {
+    type: Action.SET_ADD_NEW_COMMENT_MODE,
+    payload: enabled
+  };
+}
+
 export function fetchAllCommentsForPost(id) {
   return {
     type: Action.FETCH_ALL_COMMENTS,
@@ -49,7 +56,6 @@ export function editComment(comment) {
     payload: api.editComment(comment)
   };
 }
-
 
 export function createPost(post) {
   return {

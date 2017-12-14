@@ -67,6 +67,8 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-export default connect(mapStateToProps, { setCurrentComment, voteComment, deleteComment })(
-  Comment
-);
+export default connect(mapStateToProps, {
+  setCurrentComment,
+  voteComment,
+  deleteComment
+})(Comment);

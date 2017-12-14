@@ -6,7 +6,8 @@ const initialPostState = {
   currentPost: "",
   sort: "time",
   comments: {},
-  currentComment: ""
+  currentComment: "",
+  addNewCommentMode: false
 };
 
 export default function(state = initialPostState, action) {
@@ -21,6 +22,11 @@ export default function(state = initialPostState, action) {
           },
           { ...state.items }
         )
+      };
+    case Actions.SET_ADD_NEW_COMMENT_MODE:
+      return {
+        ...state,
+        addNewCommentMode: action.payload
       };
     case Actions.DELETE_POST_FULFILLED:
       let items = state.items;
