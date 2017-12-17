@@ -16,3 +16,4 @@ export { deleteComment } from "./actions_posts";
 export { setCurrentComment } from "./actions_posts";
 export { editComment } from "./actions_posts";
 export { setAddCommentMode } from "./actions_posts";
+export { addComment } from "./actions_posts";

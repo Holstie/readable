@@ -116,6 +116,12 @@ export default function(state = initialPostState, action) {
         ...state
       };
 
+    case Actions.ADD_COMMENT_FULFILLED:
+    return {
+      ...state,
+      comments: { ...state.comments, [action.payload.id]: action.payload }
+    }
+
     case Actions.EDIT_COMMENT_FULFILLED:
       var newObject = Object.keys(state.comments).reduce(function(
         previous,

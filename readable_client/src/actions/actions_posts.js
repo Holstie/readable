@@ -57,6 +57,13 @@ export function editComment(comment) {
   };
 }
 
+export function addComment(comment) {
+  return {
+    type: Action.ADD_COMMENT,
+    payload: api.addComment(comment)
+  };
+}
+
 export function createPost(post) {
   return {
     tyoe: Action.CREATE_POST,

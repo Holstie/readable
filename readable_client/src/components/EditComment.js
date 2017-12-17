@@ -11,7 +11,6 @@ class EditComment extends React.Component {
     title: "",
     author: "",
     body: "",
-    category: ""
   };
 
   componentDidMount() {
@@ -27,9 +26,6 @@ class EditComment extends React.Component {
       case "author":
         this.state.author = value;
         break;
-      case "category":
-        this.state.category = value;
-        break;
       case "body":
         this.state.body = value;
         break;
@@ -42,14 +38,13 @@ class EditComment extends React.Component {
 
   onEditClick = () => {
     const id = this.state.id;
-    const { title, category, body, author } = this.state;
+    const { title, body, author } = this.state;
 
     this.editComment({
       id,
       title,
       body,
       author,
-      category
     });
   };
 
@@ -66,7 +61,6 @@ class EditComment extends React.Component {
         title: "",
         body: "",
         author: "",
-        category: "none"
       };
     }
 
@@ -74,7 +68,6 @@ class EditComment extends React.Component {
     this.state.title = comment.title;
     this.state.body = comment.body;
     this.state.author = comment.author;
-    this.state.category = comment.category;
 
     return (
       <div className="edit-comment">
