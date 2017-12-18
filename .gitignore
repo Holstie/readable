@@ -2,7 +2,6 @@ sindex.js
 readable_client/src/components/CategoryList.js
 readable_client/src/components/CommentForm.js
 readable_client/src/components/CommentList.js
-readable_client/src/components/PostForm.js
 readable_client/src/components/PostList.js
 readable_client/src/utils/sAPI.js
 api-server
