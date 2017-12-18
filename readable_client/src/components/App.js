@@ -15,11 +15,8 @@ import { withRouter } from "react-router";
 // This project will be using material components in order
 // to create a little prettier design
 
-class App extends Component {
-  componentDidMount() {}
-
-  render() {
-    return (
+const App = () => {
+  return (
       <MuiThemeProvider>
         <div className="App">
           <Header />
@@ -40,19 +37,9 @@ class App extends Component {
             />
             <Route exact path="/" render={props => <Posts {...props} />} />
           </Switch>
-
-          {/* <Route exact path="/:category" component={CategoryList} />
-          <Route exact path="/:category/:post" component={CategoryList} />
-          <Route
-            exact
-            path="/:category/:post/:comment"
-            component={CategoryList}
-          />
-          <Route exact path="/newpost" component={PostForm} /> */}
         </div>
       </MuiThemeProvider>
     );
-  }
 }
 
 function mapStateToProps(state, ownProps) {

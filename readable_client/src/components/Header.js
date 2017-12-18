@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
-class Header extends Component {
+const Header = () => {
+  return (
 // Header component that displays a header text in top of project
-
-  render() {
-    return (
       <divHeader>
           <h1Header>
               Readable - Udacity project
@@ -11,6 +9,5 @@ class Header extends Component {
           </divHeader>
     )
   }
-}
 
 export default Header
