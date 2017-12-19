@@ -7,6 +7,7 @@ import { lightBlue900 } from "material-ui/styles/colors";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { setCurrentPost, votePost, deletePost } from "../actions";
+import NotFoundPage from "./NotFoundPage";
 
 class Post extends React.Component {
   setCurrentPost = id => this.props.setCurrentPost(id);
@@ -28,51 +29,60 @@ class Post extends React.Component {
       voteScore
     } = this.props.post;
 
+    const isDeleted = this.props.post.deleted;
+
     return (
-      <div class="card">
-        <Card>
-          <CardHeader
-            title={title}
-            titleColor={lightBlue900}
-            subtitle={author}
-            actAsExpander={true}
-            showExpandableButton={false}
-          />
-          <CardText expandable={false}>
-            <div className="post">
-              <p>
-                <b>Category:</b> {category}
-              </p>
-              <p>
-                <b>Vote Score:</b> {voteScore}
-              </p>
-              <p>
-                <b>Comments:</b> {commentCount}
-              </p>
-              <p>
-                <b>Body:</b> {body}
-              </p>
+      <div>
+        {isDeleted ? (
+          <NotFoundPage />
+        ) : (
+            <div class="card">
+              <Card>
+                <CardHeader
+                  title={title}
+                  titleColor={lightBlue900}
+                  subtitle={author}
+                  actAsExpander={true}
+                  showExpandableButton={false}
+                />
+                <CardText expandable={false}>
+                  <div className="post">
+                    <p>
+                      <b>Category:</b> {category}
+                    </p>
+                    <p>
+                      <b>Vote Score:</b> {voteScore}
+                    </p>
+                    <p>
+                      <b>Comments:</b> {commentCount}
+                    </p>
+                    <p>
+                      <b>Body:</b> {body}
+                    </p>
+                  </div>
+                </CardText>
+                <CardActions>
+                  <FlatButton
+                    label="Edit Post"
+                    onClick={() => {
+                      this.setCurrentPost(id);
+                    }}
+                    containerElement={<Link to={"/editpost/" + id} />}
+                  />
+                  <FlatButton label="Upvote" onClick={() => this.onUpVote(id)} />
+                  <FlatButton label="Downvote" onClick={() => this.onDownVote(id)} />
+                  <FlatButton
+                    label="Details"
+                    onClick={() => {
+                      this.setCurrentPost(id);
+                    }}
+                    containerElement={<Link to={"/" + category + "/" + id} />}
+                  />
+                  <FlatButton label="Delete" onClick={() => this.deletePost(id)} />
+                </CardActions>
+              </Card>
             </div>
-          </CardText>
-          <CardActions>
-            <FlatButton
-              label="Edit Post"
-              onClick={() => {
-              }}
-              containerElement={<Link to={"/editpost/" + id} />}
-            />
-            <FlatButton label="Upvote" onClick={() => this.onUpVote(id)} />
-            <FlatButton label="Downvote" onClick={() => this.onDownVote(id)} />
-            <FlatButton
-              label="Details"
-              onClick={() => {
-                this.setCurrentPost(id);
-              }}
-              containerElement={<Link to={"/" + category + "/" + id} />}
-            />
-            <FlatButton label="Delete" onClick={() => this.deletePost(id)} />
-          </CardActions>
-        </Card>
+          )}
       </div>
     );
   }

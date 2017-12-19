@@ -11,6 +11,7 @@ import Post from "./Post";
 import { fetchAllPosts } from "../actions";
 import PropTypes from "prop-types";
 import Comments from "./Comments"
+import NotFoundPage from "./NotFoundPage";
 
 class PostDeatils extends React.Component {
   static propTypes = {
@@ -30,14 +31,21 @@ class PostDeatils extends React.Component {
       return post.id === this.props.currentPost;
     });
 
-    return (
-      <div>
-        <ul>{this.createPosts(filtered)}</ul>
+    if (filtered.length !== 0) {
 
-        <h1>Comments</h1>
-        <Comments/>
-      </div>
-    );
+      return (
+        <div>
+          <ul>{this.createPosts(filtered)}</ul>
+
+          <h1>Comments</h1>
+          <Comments />
+        </div>
+      );
+    } else {
+      return (
+        <NotFoundPage/>
+      )
+    }
   }
 }
 function mapStateToProps(state) {
