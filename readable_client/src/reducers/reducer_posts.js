@@ -44,7 +44,26 @@ export default function(state = initialPostState, action) {
       }
       return {
         ...state,
-        comments
+        comments,
+        items: {
+          ...state.items,
+          [action.payload.parentId]: {
+            ...state.items[action.payload.parentId],
+            commentCount: state.items[action.payload.parentId].commentCount - 1
+          }
+        }
+      };
+    case Actions.ADD_COMMENT_FULFILLED:
+      return {
+        ...state,
+        comments: { ...state.comments, [action.payload.id]: action.payload },
+        items: {
+          ...state.items,
+          [action.payload.parentId]: {
+            ...state.items[action.payload.parentId],
+            commentCount: state.items[action.payload.parentId].commentCount + 1
+          }
+        }
       };
     case Actions.VOTE_POST_FULFILLED:
       return {
@@ -115,13 +134,6 @@ export default function(state = initialPostState, action) {
       return {
         ...state
       };
-
-    case Actions.ADD_COMMENT_FULFILLED:
-    return {
-      ...state,
-      comments: { ...state.comments, [action.payload.id]: action.payload }
-    }
-
     case Actions.EDIT_COMMENT_FULFILLED:
       var newObject = Object.keys(state.comments).reduce(function(
         previous,
