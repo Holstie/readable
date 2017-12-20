@@ -18,6 +18,8 @@ class EditPost extends React.Component {
     this.props.changeRoute("editPost");
   }
 
+  changeRouteTo = route => this.props.changeRoute(route);
+  
   handleInputChange = event => {
     const target = event.target;
     const value = target.value;
@@ -51,6 +53,8 @@ class EditPost extends React.Component {
       author,
       category
     });
+    this.props.history.push("/")
+    this.changeRouteTo("")
   };
 
   render() {

@@ -17,6 +17,8 @@ class EditComment extends React.Component {
     this.props.changeRoute("editComment");
   }
 
+  changeRouteTo = route => this.props.changeRoute(route);  
+
   handleInputChange = event => {
     const target = event.target;
     const value = target.value;
@@ -39,14 +41,14 @@ class EditComment extends React.Component {
   onEditClick = () => {
     const id = this.state.id;
     const { title, body, author } = this.state;
-
     this.editComment({
       id,
       title,
       body,
       author,
     });
-  };
+    this.props.history.push("/" + this.props.currentCategory + "/" + this.props.currentPost)
+    };
 
   render() {
     const actionDoneStyle = {
@@ -109,8 +111,10 @@ function mapStateToProps(state, ownProps) {
   return {
     comment: Object.keys(state.posts.comments)
       .map(key => state.posts.comments[key])
-      .filter(comment => comment.id === state.posts.currentComment)
-  };
+      .filter(comment => comment.id === state.posts.currentComment),
+      currentPost: state.posts.currentPost,
+      currentCategory: state.posts.currentCategory
+      };
 }
 
 export default connect(mapStateToProps, { changeRoute, editComment })(EditComment);

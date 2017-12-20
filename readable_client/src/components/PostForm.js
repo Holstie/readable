@@ -9,7 +9,6 @@ import ActionDone from "material-ui/svg-icons/action/done";
 const uuidv4 = require("uuid/v4");
 
 class PostForm extends React.Component {
-
   state = {
     id: "",
     title: "",
@@ -22,6 +21,8 @@ class PostForm extends React.Component {
     this.props.changeRoute("newPost");
   }
 
+  changeRouteTo = route => this.props.changeRoute(route);
+  
   handleInputChange = event => {
     const target = event.target;
     const value = target.value;
@@ -57,12 +58,11 @@ class PostForm extends React.Component {
       author,
       category
     });
-    
+    this.props.history.push("/")
+    this.changeRouteTo("")
   };
 
-
   render() {
-    console.log("currentPost", this.props.currentPost);
     const actionDoneStyle = {
       marginRight: 20
     };
@@ -119,7 +119,6 @@ class PostForm extends React.Component {
   }
 }
 function mapStateToProps(state, props) {
-  return {
-  };
+  return {};
 }
 export default connect(mapStateToProps, { createPost, changeRoute })(PostForm);
