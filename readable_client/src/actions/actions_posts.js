@@ -1,5 +1,6 @@
 import * as Action from "../constants/Types";
 import * as api from "../utils/api";
+import history from '../history' 
 
 export function fetchPostsByCategory(category) {
   return {
@@ -68,6 +69,7 @@ export function createPost(post) {
   return {
     tyoe: Action.CREATE_POST,
     payload: api.createPost(post)
+      .then(dispatch => history.push('/'))
   };
 }
 

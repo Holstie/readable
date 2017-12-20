@@ -9,6 +9,7 @@ import ActionDone from "material-ui/svg-icons/action/done";
 const uuidv4 = require("uuid/v4");
 
 class PostForm extends React.Component {
+
   state = {
     id: "",
     title: "",
@@ -56,9 +57,12 @@ class PostForm extends React.Component {
       author,
       category
     });
+    
   };
 
+
   render() {
+    console.log("currentPost", this.props.currentPost);
     const actionDoneStyle = {
       marginRight: 20
     };
@@ -115,6 +119,7 @@ class PostForm extends React.Component {
   }
 }
 function mapStateToProps(state, props) {
-  return {};
+  return {
+  };
 }
 export default connect(mapStateToProps, { createPost, changeRoute })(PostForm);
